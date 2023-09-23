@@ -26,3 +26,28 @@ Then(/^URL should match (.*)$/, async function(ExpectedURL)
     chai.expect(browserURL).to.equal(ExpectedURL)
     await browser.pause(8000)
 })
+Given(/^A webpage is opened$/, async function()
+{
+    await browser.url("https://the-internet.herokuapp.com/inputs")
+    await browser.pause(10000)
+    // await browser.setTimeout({ implicit:15000, pageLoad:10000})
+})
+When(/^Perform web interactions$/, async function()
+{   
+
+    //type the input 
+    //clear the input fields
+    //click and type
+    //slow typing
+    let numbers=12345
+    let numstr=numbers.toString()
+    let inputbox=await $(`[type=number]`)
+    await inputbox.click()
+    await inputbox.setValue(numstr)
+    for(let i=0; i<numstr.length; i++)
+    {
+        let charStr=numstr.charAt(i)
+        await browser.pause(3000)
+        await browser.keys(charStr)
+    }
+})
